@@ -2,6 +2,7 @@ package models
 
 import (
 	"errors"
+	"fmt"
 
 	"gits-assignment/config"
 
@@ -13,14 +14,14 @@ type Book struct {
 	Title     string
 	Year      uint
 	AuthorID  uint
-	Publisher Publisher
+	Publisher *Publisher `json:",omitempty"`
 }
 
 func (b *Book) ReadBooks() ([]Book, error) {
 	var book []Book
 	err := config.DB.Model(&Book{}).Preload("Publisher").Find(&book).Error
 	if err != nil {
-		return nil, errors.New("failed to read books")
+		return nil, fmt.Errorf("failed to read book: %v", err)
 	}
 
 	return book, nil
@@ -35,7 +36,7 @@ func (b *Book) CreateBook(title string, year, author uint) error {
 
 	err := config.DB.Create(&newBook).Error
 	if err != nil {
-		return errors.New("failed to create book")
+		return fmt.Errorf("failed to create book: %v", err)
 	}
 
 	return nil
@@ -44,7 +45,7 @@ func (b *Book) CreateBook(title string, year, author uint) error {
 func (b *Book) UpdateBook(book Book) error {
 	err := config.DB.Updates(&book).Error
 	if err != nil {
-		return errors.New("failed to update book")
+		return fmt.Errorf("failed to update book: %v", err)
 	}
 
 	return nil
@@ -53,7 +54,7 @@ func (b *Book) UpdateBook(book Book) error {
 func (b *Book) DeleteBook(book Book) error {
 	err := config.DB.Delete(&book).Error
 	if err != nil {
-		return errors.New("failed to delete book")
+		return fmt.Errorf("failed to delete book: %v", err)
 	}
 
 	return nil

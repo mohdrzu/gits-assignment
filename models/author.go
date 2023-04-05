@@ -2,6 +2,7 @@ package models
 
 import (
 	"errors"
+	"fmt"
 
 	"gits-assignment/config"
 
@@ -19,7 +20,7 @@ func (a *Author) ReadAuthors() ([]Author, error) {
 	var author []Author
 	err := config.DB.Model(&Author{}).Preload("Books").Find(&author).Error
 	if err != nil {
-		return nil, errors.New("failed to read authors")
+		return nil, fmt.Errorf("failed to read author: %v", err)
 	}
 
 	return author, nil
@@ -33,7 +34,7 @@ func (a *Author) CreateAuthor(name, email string) error {
 
 	err := config.DB.Create(&newAuthor).Error
 	if err != nil {
-		return errors.New("failed to create authors")
+		return fmt.Errorf("failed to create author: %v", err)
 	}
 
 	return nil
@@ -42,7 +43,7 @@ func (a *Author) CreateAuthor(name, email string) error {
 func (a *Author) UpdateAuthor(author Author) error {
 	err := config.DB.Updates(&author).Error
 	if err != nil {
-		return errors.New("failed to update authors")
+		return fmt.Errorf("failed to update author: %v", err)
 	}
 
 	return nil
@@ -51,7 +52,7 @@ func (a *Author) UpdateAuthor(author Author) error {
 func (a *Author) DeleteAuthor(author Author) error {
 	err := config.DB.Delete(&author).Error
 	if err != nil {
-		return errors.New("failed to delete authors")
+		return fmt.Errorf("failed to delete author: %v", err)
 	}
 
 	return nil

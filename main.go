@@ -16,6 +16,7 @@ func init() {
 	config.LoadENV()
 	config.InitDatabase()
 	migration.SyncDatabase()
+	migration.SeedDatabase()
 }
 
 func main() {
