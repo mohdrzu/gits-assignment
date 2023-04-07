@@ -1,6 +1,6 @@
 ## Setup Step
 ### Requirement
-- Make sure you have postgre installed on your machine.
+- Make sure you have PostgreSQL installed on your machine.
 - Create a database to hold the data.
 
 ### Running the app
@@ -18,3 +18,6 @@ JWT_SECRET=<random string combination>
 ```
 2. Open `terminal` or `command prompt`
 3. Make sure you are in the root folder and then run `go run main.go`
+
+## Note
+SQL script for database and POSTMAN collection can be found in folder "misc"
