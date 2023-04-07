@@ -20,4 +20,13 @@ JWT_SECRET=<random string combination>
 3. Make sure you are in the root folder and then run `go run main.go`
 
 ## Note
-SQL script for database and POSTMAN collection can be found in folder "misc"
+### When the app run for the first time:
+
+1. Table for the database will be automatically created. 
+2. Some data will also be generated. 
+3. A user also automatically generated with the following information. To be used for authentication.
+```
+ email:     admin@gits.com
+ password:  123456
+```
+4. SQL script for database and POSTMAN collection can be found in folder "misc"
